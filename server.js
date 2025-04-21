@@ -3,13 +3,20 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const authRoutes = require('./routes/authRoutes');
 const PORT = process.env.PORT || 3000;
 const app = express();
-app.use(cors());
+
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+  }));
 app.use(express.json());
 
+const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+const deliveryRoutes = require('./routes/deliveryRoutes');
+app.use('/api/delivery', deliveryRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)

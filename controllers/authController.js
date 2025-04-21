@@ -25,7 +25,7 @@ exports.login = async (req, res) => {
     if (!user) return res.status(400).json({ msg: 'User not found' });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: 'Invalid password' });
+    if (!isMatch) return res.status(401).json({ msg: 'Invalid password' });
 
     const token = jwt.sign(
       { userId: user._id, role: user.role },
@@ -33,7 +33,18 @@ exports.login = async (req, res) => {
       { expiresIn: '1d' }
     );
 
-    res.json({ token, role: user.role });
+    console.log({
+      token, user: {
+        name: user.name,
+        email: user.email, role: user.role
+      }
+    });
+    res.json({
+      token, user: {
+        name: user.name,
+        email: user.email, role: user.role
+      }
+    });
   } catch (err) {
     res.status(500).json({ msg: 'Login failed', error: err.message });
   }
