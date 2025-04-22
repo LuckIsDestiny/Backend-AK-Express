@@ -49,3 +49,17 @@ exports.login = async (req, res) => {
     res.status(500).json({ msg: 'Login failed', error: err.message });
   }
 };
+
+// exports.logout = async (_req, res) => {
+//   try {
+//     // Clear token from client
+//     res.clearCookie('token', {
+//       httpOnly: true,
+//       secure: false, 
+//       sameSite: 'Lax'
+//     });
+//     res.status(200).json({ msg: 'Logged out successfully' });
+//   } catch (err) {
+//     res.status(500).json({ msg: 'Logout failed', error: err.message });
+//   }
+// };

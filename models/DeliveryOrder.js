@@ -16,7 +16,7 @@ const deliveryOrderSchema = new mongoose.Schema({
     default: null
   },
   payment: {
-    amount: { type: Number},
+    amount: { type: Number, required: true},
     status: {
       type: String, 
       enum: ['Pending', 'Completed', 'Failed'],
@@ -25,6 +25,7 @@ const deliveryOrderSchema = new mongoose.Schema({
     method: {
       type: String,
       enum: ['Cash', 'Card', 'UPI'],
+      required: true
     },
     transactionId: String
   }

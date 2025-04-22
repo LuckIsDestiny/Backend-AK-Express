@@ -9,18 +9,19 @@ const {
     updateStatus,
     getMyOrders,
     getAllOrders,
-    trackOrder,
-    updatePayment
+    getAllDeliveryAgents
 } = require('../controllers/deliveryController');
 
 // Admin routes
-router.post('/create', verifyToken, authorizeRole('Admin'), createOrder);
-router.put('/assign', verifyToken, authorizeRole('Admin'), assignOrder);
-router.get('/all', verifyToken, authorizeRole('Admin'), getAllOrders);
+router.post('/create', verifyToken, authorizeRole('Vendor'), createOrder);
+router.put('/assign', verifyToken, authorizeRole('Vendor'), assignOrder);
+router.get('/all', verifyToken, authorizeRole('Vendor'), getAllOrders);
+router.get('/agents/all', verifyToken, authorizeRole('Vendor'), getAllDeliveryAgents);
+
 
 // User routes
-router.get('/track/:orderId', verifyToken, authorizeRole('User'), trackOrder);
-router.put('/payment/:orderId', verifyToken, authorizeRole('User'), updatePayment);
+// router.get('/track/:orderId', verifyToken, authorizeRole('User'), trackOrder);
+// router.put('/payment/:orderId', verifyToken, authorizeRole('User'), updatePayment);
 
 // DeliveryAgent routes
 router.get('/my-orders', verifyToken, authorizeRole('DeliveryAgent'), getMyOrders);
