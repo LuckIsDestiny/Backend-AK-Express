@@ -12,7 +12,7 @@ const {
     getAllDeliveryAgents
 } = require('../controllers/deliveryController');
 
-// Admin routes
+// Vendor routes
 router.post('/create', verifyToken, authorizeRole('Vendor'), createOrder);
 router.put('/assign', verifyToken, authorizeRole('Vendor'), assignOrder);
 router.get('/all', verifyToken, authorizeRole('Vendor'), getAllOrders);
@@ -24,7 +24,7 @@ router.get('/agents/all', verifyToken, authorizeRole('Vendor'), getAllDeliveryAg
 // router.put('/payment/:orderId', verifyToken, authorizeRole('User'), updatePayment);
 
 // DeliveryAgent routes
-router.get('/my-orders', verifyToken, authorizeRole('DeliveryAgent'), getMyOrders);
+router.get('/my-orders/:userId', verifyToken, authorizeRole('DeliveryAgent'), getMyOrders);
 router.put('/status', verifyToken, authorizeRole('DeliveryAgent'), updateStatus);
 
 module.exports = router;
